@@ -64,6 +64,7 @@ dependencies {
     implementation("androidx.compose.ui:ui-text-google-fonts:1.7.7")
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.32.0")
 
+
     // Room components
     implementation("androidx.room:room-runtime:2.6.1")
     ksp("androidx.room:room-compiler:2.6.1") // Use KSP instead
