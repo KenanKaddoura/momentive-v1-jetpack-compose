@@ -35,7 +35,7 @@ class TaskContainer : Application() {
         TaskRepositoryImpl(database.dao)
     }
 
-    private val useCases : TaskUseCases by lazy {
+    val useCases : TaskUseCases by lazy {
         TaskUseCases(
             upsertTaskUseCases = UpsertTaskUseCases(repository),
             deleteTaskUseCase = DeleteTaskUseCase(repository),
@@ -44,12 +44,5 @@ class TaskContainer : Application() {
         )
     }
 
-    val taskViewModel : TaskViewModel by lazy {
-        TaskViewModel(useCases)
-    }
-
-    val addEditViewModel : AddEditViewModel by lazy {
-        AddEditViewModel(useCases)
-    }
 
 }

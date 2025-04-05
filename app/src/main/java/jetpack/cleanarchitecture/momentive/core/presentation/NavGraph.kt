@@ -20,7 +20,7 @@ fun NavGraph(navController : NavHostController) {
             TasksScreen(navController = navController)
         }
         composable(Screen.AddEditTaskSheet.route) {
-            AddEditSheet()
+            AddEditSheet(navController = navController)
         }
         composable(Screen.Notes.route) { }
         composable(Screen.Profile.route) { }

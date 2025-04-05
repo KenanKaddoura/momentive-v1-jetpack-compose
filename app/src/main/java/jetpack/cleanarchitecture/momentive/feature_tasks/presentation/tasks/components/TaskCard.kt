@@ -116,7 +116,7 @@ fun TaskCardPreview() {
     TaskCard(
         title = "Task Title ..",
         description = "Description .. ",
-        priority = Priority.URGENT_NOT_IMPORTANT,
+        priority = Priority.NOT_IMPORTANT_URGENT,
         date = LocalDate.of(2025, 2, 1),
         selected = false,
         onClick = {},

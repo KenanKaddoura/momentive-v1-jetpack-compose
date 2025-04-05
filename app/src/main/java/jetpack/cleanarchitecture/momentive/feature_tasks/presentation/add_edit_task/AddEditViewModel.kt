@@ -4,13 +4,14 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.ViewModel
 import jetpack.cleanarchitecture.momentive.feature_tasks.domain.use_cases.TaskUseCases
 import jetpack.cleanarchitecture.momentive.feature_tasks.presentation.tasks.TaskEvent
 import jetpack.cleanarchitecture.momentive.feature_tasks.presentation.tasks.TaskState
 @RequiresApi(Build.VERSION_CODES.O)
 class AddEditViewModel(
     private val taskUseCases: TaskUseCases
-) {
+) : ViewModel() {
 
     private val _state = mutableStateOf(AddEditState())
     val state: State<AddEditState> = _state

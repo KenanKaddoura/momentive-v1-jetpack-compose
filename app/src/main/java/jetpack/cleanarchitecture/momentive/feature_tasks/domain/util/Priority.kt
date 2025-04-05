@@ -1,9 +1,9 @@
 package jetpack.cleanarchitecture.momentive.feature_tasks.domain.util
 
 enum class Priority(val text : String) {
-    URGENT_IMPORTANT("Urgent\nImportant"),
-    NOT_URGENT_IMPORTANT("Not Urgent\nImportant"),
-    URGENT_NOT_IMPORTANT("Urgent\nNot Important"),
-    NOT_URGENT_NOT_IMPORTANT("Not Urgent\nNot Important"),
+    IMPORTANT_URGENT("Important\nUrgent"),
+    IMPORTANT_NOT_URGENT("Important\nNot Urgent"),
+    NOT_IMPORTANT_URGENT("Not Important\nUrgent"),
+    NOT_IMPORTANT_NOT_URGENT("Not Important\nNot Urgent"),
     NO_PRIORITY("No Priority")
 }

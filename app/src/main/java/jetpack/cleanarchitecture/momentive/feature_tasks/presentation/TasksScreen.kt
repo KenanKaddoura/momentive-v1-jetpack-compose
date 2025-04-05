@@ -9,11 +9,15 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import jetpack.cleanarchitecture.momentive.core.presentation.Screen
 import jetpack.cleanarchitecture.momentive.feature_tasks.container.TaskContainer
+import jetpack.cleanarchitecture.momentive.feature_tasks.container.TaskViewModelFactory
 import jetpack.cleanarchitecture.momentive.feature_tasks.presentation.tasks.TaskEvent
 import jetpack.cleanarchitecture.momentive.feature_tasks.presentation.tasks.TaskViewModel
 import jetpack.cleanarchitecture.momentive.feature_tasks.presentation.tasks.components.TaskCard
@@ -21,9 +25,13 @@ import jetpack.cleanarchitecture.momentive.feature_tasks.presentation.tasks.comp
 @RequiresApi(35)
 @Composable
 fun TasksScreen(
-    viewModel : TaskViewModel = TaskContainer.instance.taskViewModel,
     navController : NavHostController
 ) {
+    // View Model Initialisation ...
+    val context = LocalContext.current.applicationContext as TaskContainer
+    val viewModel: TaskViewModel = viewModel(
+        factory = viewModelFactory { TaskViewModel(context.useCases) }
+    )
 
     val state = viewModel.state.value
 
