@@ -1,3 +1,5 @@
+<img src="assets/app_logo_v2_cropped.png" alt="Momentive Logo" width="284" height="100">
+
 # 📱 Momentive
 
 **Momentive** = *Momentum* + *Active*
