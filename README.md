@@ -39,8 +39,9 @@ Here’s a sneak peek at the prototype for the **Task Management** feature, desi
 - Kotlin  
 - Jetpack Compose  
 - Material 3  
-- MVVM Architecture  
-
+- MVVM Architecture
+- ROOM
+  
 ---
 
 ## 🚧 Project Status
