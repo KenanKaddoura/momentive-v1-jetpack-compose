@@ -25,13 +25,11 @@ import jetpack.cleanarchitecture.momentive.feature_tasks.presentation.tasks.comp
 @RequiresApi(35)
 @Composable
 fun TasksScreen(
-    navController : NavHostController
-) {
-    // View Model Initialisation ...
-    val context = LocalContext.current.applicationContext as TaskContainer
-    val viewModel: TaskViewModel = viewModel(
-        factory = viewModelFactory { TaskViewModel(context.useCases) }
+    navController : NavHostController,
+    viewModel: TaskViewModel = viewModel(
+        factory = TaskViewModelFactory(TaskContainer.instance.useCases)
     )
+) {
 
     val state = viewModel.state.value
 

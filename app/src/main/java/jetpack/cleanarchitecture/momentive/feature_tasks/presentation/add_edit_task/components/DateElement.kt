@@ -16,10 +16,12 @@ import java.time.format.DateTimeFormatter
 fun DateElement(
     modifier : Modifier = Modifier,
     date: LocalDate = LocalDate.now(),
-    onClick : () -> Unit
+    onClick : (LocalDate) -> Unit
 ) {
     TextButton(
-        onClick = onClick
+        onClick = {
+            onClick(date.plusDays(1)) /*Must be the date picked */
+        }
     ) {
        Text(
            text = usableDate(date),

@@ -31,7 +31,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import jetpack.cleanarchitecture.momentive.feature_tasks.container.AddEditViewModelFactory
 import jetpack.cleanarchitecture.momentive.feature_tasks.container.TaskContainer
+import jetpack.cleanarchitecture.momentive.feature_tasks.container.TaskViewModelFactory
 import jetpack.cleanarchitecture.momentive.feature_tasks.presentation.add_edit_task.components.DateElement
 import jetpack.cleanarchitecture.momentive.feature_tasks.presentation.add_edit_task.components.PrioritySection
 import jetpack.cleanarchitecture.momentive.feature_tasks.presentation.add_edit_task.components.TransparentHintTextField
@@ -41,23 +43,26 @@ import jetpack.cleanarchitecture.momentive.feature_tasks.presentation.tasks.Task
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddEditSheet(
-    navController : NavHostController
-) {
-    // View Model Initialisation ...
-    val context = LocalContext.current.applicationContext as TaskContainer
-    val viewModel: AddEditViewModel = viewModel(
-        factory = viewModelFactory { AddEditViewModel(context.useCases) }
+    navController : NavHostController,
+    viewModel: AddEditViewModel = viewModel(
+        factory = AddEditViewModelFactory(TaskContainer.instance.useCases)
     )
+) {
 
     val state = viewModel.state.value
 
+    val sheetState = rememberModalBottomSheetState(
+        skipPartiallyExpanded = false,
+        confirmValueChange = { true}
+    )
+
     ModalBottomSheet(
-        sheetState = rememberStandardBottomSheetState(
-            initialValue = SheetValue.Expanded
-        ),
-        onDismissRequest = { },
-        containerColor = MaterialTheme.colorScheme.primaryContainer,
-        contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+        sheetState = sheetState ,
+        onDismissRequest = {
+            navController.popBackStack()
+        },
+        containerColor = MaterialTheme.colorScheme.onPrimaryContainer,
+        contentColor = MaterialTheme.colorScheme.primaryContainer,
         dragHandle = {/* The purpose of this: Removing the handle symbol at top */},
         shape = RoundedCornerShape(12.dp)
     ) {
@@ -71,15 +76,15 @@ fun AddEditSheet(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp),
-                text = "state.titleFieldText",
+                text = state.titleFieldText,
                 textStyle = MaterialTheme.typography.titleMedium,
                 isHintVisible = false,
                 hint = "",
                 onValueChange = {
-                    // ViewModel
+                    viewModel.onEvent(AddEditEvent.enterTitleText(it))
                 },
                 onFocusChange = {
-                    // ViewModel
+                    viewModel.onEvent(AddEditEvent.focusOnTitleField)
 
                 },
                 singleLine = true
@@ -89,15 +94,15 @@ fun AddEditSheet(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp),
-                text = "state.descriptionFieldText",
+                text = state.descriptionFieldText,
                 textStyle = MaterialTheme.typography.bodyMedium,
                 isHintVisible = false,
                 hint = "",
                 onValueChange = {
-                    // ViewModel
+                    viewModel.onEvent(AddEditEvent.enterDescriptionText(it))
                 },
                 onFocusChange = {
-                    // ViewModel
+                    viewModel.onEvent(AddEditEvent.focusOnDecriptionField)
                 }
             )
 
@@ -111,7 +116,10 @@ fun AddEditSheet(
                     .height(IntrinsicSize.Min)
             ) {
                 PrioritySection(
-                    onSelect = {}
+                    onSelect = {
+                        viewModel.onEvent(AddEditEvent.choosePriority(it))
+                    },
+                    selectedPriority = state.priorityChosen
                 )
 
                 VerticalDivider(
@@ -122,7 +130,10 @@ fun AddEditSheet(
                 Spacer(modifier = Modifier.width(40.dp))
 
                 DateElement(
-                    onClick = {}
+                    onClick = {
+                        viewModel.onEvent(AddEditEvent.chooseDate(it))
+                    },
+                    date = state.date
                 )
             }
 
@@ -130,10 +141,10 @@ fun AddEditSheet(
 
 
     }
-//
-//    LaunchedEffect(Unit) {
-//        sheetState.show()
-//    }
+
+    LaunchedEffect(Unit) {
+        sheetState.partialExpand()
+    }
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
