@@ -1,10 +1,12 @@
-<img src="assets/app_logo_v2_cropped.png" alt="Momentive Logo" width="284" height="100">
 
-# 📱 Momentive
+
+# 📱 Momentive 
 
 **Momentive** = *Momentum* + *Active*
 
 > A personal productivity mobile application built using **Kotlin** and **Jetpack Compose**, designed to help you stay focused, organized, and proactive in achieving your goals.
+
+  <img src="assets/app_logo_v2_cropped.png" alt="Momentive Logo" width="284" height="100">
 
 ---
 
