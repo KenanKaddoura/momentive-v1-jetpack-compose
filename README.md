@@ -30,7 +30,7 @@
 
 Here’s a sneak peek at the prototype for the **Task Management** feature, designed using **Figma**:
 
-![Task Feature - Figma Prototype](assets/prototpes/task_feature_prototype.png)
+![Task Feature - Figma Prototype](assets/prototypes/task_feature_prototype.png)
 
 ---
 
