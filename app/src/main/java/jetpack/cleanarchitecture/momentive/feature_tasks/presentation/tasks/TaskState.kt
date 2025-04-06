@@ -7,4 +7,5 @@ data class TaskState(
     val selectedTasksList : List<Task> = emptyList(),
     val isSelectionMode : Boolean = false,
     val isMoreActionsClicked : Boolean = false,
+    val sheetState : Boolean = false
 )
