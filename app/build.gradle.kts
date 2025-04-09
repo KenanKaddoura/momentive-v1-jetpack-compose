@@ -63,7 +63,6 @@ dependencies {
 
     implementation("androidx.compose.ui:ui-text-google-fonts:1.7.7")
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.32.0")
-    implementation("com.google.accompanist:accompanist-navigation-material:0.34.0-alpha") // Bottom Sheet Navigation
 
     implementation("androidx.navigation:navigation-compose:2.8.9")
 

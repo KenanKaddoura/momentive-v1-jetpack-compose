@@ -1,4 +1,4 @@
-package jetpack.cleanarchitecture.momentive.feature_tasks.presentation.tasks.components
+package jetpack.cleanarchitecture.momentive.feature_tasks.presentation.components.tasks_components
 
 import android.os.Build
 import androidx.annotation.RequiresApi

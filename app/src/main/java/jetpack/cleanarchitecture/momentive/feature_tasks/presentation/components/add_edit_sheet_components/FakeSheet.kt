@@ -1,6 +1,5 @@
-package jetpack.cleanarchitecture.momentive.feature_tasks.presentation.add_edit_task.components
+package jetpack.cleanarchitecture.momentive.feature_tasks.presentation.components.add_edit_sheet_components
 
-import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Arrangement
@@ -17,29 +16,35 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.SheetValue
 import androidx.compose.material3.VerticalDivider
-import androidx.compose.material3.rememberStandardBottomSheetState
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import jetpack.cleanarchitecture.momentive.feature_tasks.domain.util.Priority
+import jetpack.cleanarchitecture.momentive.feature_tasks.presentation.events.AddEditEvent
+import java.time.LocalDate
 
-@SuppressLint("NewApi")
+
+@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SheetFake() {
+fun FakeSheet() {
 
+    val sheetState = rememberModalBottomSheetState()
+
+    if (true) {
 
         ModalBottomSheet(
-            sheetState = rememberStandardBottomSheetState(
-                initialValue = SheetValue.Expanded
-            ),
-            onDismissRequest = { },
-            containerColor = MaterialTheme.colorScheme.primaryContainer,
-            contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-            dragHandle = {/* The purpose of this: Removing the handle symbol at top */},
+            sheetState = sheetState, // State
+            onDismissRequest = {
+
+            },
+            containerColor = MaterialTheme.colorScheme.surfaceContainer,
+            contentColor = MaterialTheme.colorScheme.onSurface,
+            dragHandle = {/* The purpose of this: Removing the handle symbol at top */ },
             shape = RoundedCornerShape(12.dp)
         ) {
             Column(
@@ -52,16 +57,14 @@ fun SheetFake() {
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(8.dp),
-                    text = "state.titleFieldText",
-                    textStyle = MaterialTheme.typography.titleMedium,
+                    text = "My Title Task",
+                    textStyle = MaterialTheme.typography.titleLarge,
+                    textColor = MaterialTheme.colorScheme.onSurface,
                     isHintVisible = false,
-                    hint = "",
+                    hint = "Hint",
                     onValueChange = {
-                        // ViewModel
                     },
                     onFocusChange = {
-                        // ViewModel
-
                     },
                     singleLine = true
                 )
@@ -70,15 +73,14 @@ fun SheetFake() {
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(8.dp),
-                    text = "state.descriptionFieldText",
-                    textStyle = MaterialTheme.typography.bodyMedium,
+                    text = "My Description Task", // State
+                    textStyle = MaterialTheme.typography.bodyLarge,
+                    textColor = MaterialTheme.colorScheme.onSurface,
                     isHintVisible = false,
-                    hint = "",
+                    hint = "Hint", // State
                     onValueChange = {
-                        // ViewModel
                     },
                     onFocusChange = {
-                        // ViewModel
                     }
                 )
 
@@ -89,9 +91,12 @@ fun SheetFake() {
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(IntrinsicSize.Min)) {
+                        .height(IntrinsicSize.Min)
+                ) {
                     PrioritySection(
-                        onSelect = {}
+                        onSelect = {
+                        },
+                        selectedPriority = Priority.NO_PRIORITY // State
                     )
 
                     VerticalDivider(
@@ -99,10 +104,12 @@ fun SheetFake() {
                             .width(2.dp)
                             .padding(top = 8.dp, bottom = 8.dp)
                     )
-                    Spacer(modifier = Modifier.width(40.dp))
+                    Spacer(modifier = Modifier.width(30.dp))
 
                     DateElement(
-                        onClick = {}
+                        onClick = {
+                        },
+                        date = LocalDate.now() // State
                     )
                 }
 
@@ -110,11 +117,13 @@ fun SheetFake() {
 
 
         }
+    }
 }
 
-@SuppressLint("NewApi")
+
+@RequiresApi(Build.VERSION_CODES.O)
 @Preview
 @Composable
-fun SheetFakePreview() {
-    SheetFake()
+fun FakeSheetPreview() {
+    FakeSheet()
 }

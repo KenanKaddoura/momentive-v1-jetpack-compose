@@ -1,4 +1,4 @@
-package jetpack.cleanarchitecture.momentive.feature_tasks.presentation.add_edit_task.components
+package jetpack.cleanarchitecture.momentive.feature_tasks.presentation.components.add_edit_sheet_components
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -26,7 +26,7 @@ fun DateElement(
        Text(
            text = usableDate(date),
            style = MaterialTheme.typography.titleMedium,
-           color = MaterialTheme.colorScheme.onTertiaryContainer,
+           color = MaterialTheme.colorScheme.tertiary,
            overflow = TextOverflow.Ellipsis
        )
     }

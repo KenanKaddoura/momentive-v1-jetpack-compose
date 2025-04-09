@@ -10,7 +10,6 @@ import jetpack.cleanarchitecture.momentive.R
 
 sealed class Screen(val route: String) {
     object Tasks : Screen(route = "tasks")
-    object AddEditTaskSheet : Screen(route = "add_edit_task_sheet")
     object Notes : Screen(route = "notes")
     object Profile : Screen(route = "profiles")
 }

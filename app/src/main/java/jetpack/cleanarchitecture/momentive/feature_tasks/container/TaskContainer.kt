@@ -11,8 +11,6 @@ import jetpack.cleanarchitecture.momentive.feature_tasks.domain.use_cases.GetTas
 import jetpack.cleanarchitecture.momentive.feature_tasks.domain.use_cases.GetTasksUseCase
 import jetpack.cleanarchitecture.momentive.feature_tasks.domain.use_cases.TaskUseCases
 import jetpack.cleanarchitecture.momentive.feature_tasks.domain.use_cases.UpsertTaskUseCases
-import jetpack.cleanarchitecture.momentive.feature_tasks.presentation.add_edit_task.AddEditViewModel
-import jetpack.cleanarchitecture.momentive.feature_tasks.presentation.tasks.TaskViewModel
 
 @RequiresApi(Build.VERSION_CODES.O)
 class TaskContainer : Application() {

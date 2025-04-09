@@ -5,9 +5,9 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import jetpack.cleanarchitecture.momentive.feature_tasks.domain.use_cases.TaskUseCases
-import jetpack.cleanarchitecture.momentive.feature_tasks.presentation.tasks.TaskViewModel
+import jetpack.cleanarchitecture.momentive.feature_tasks.presentation.TaskViewModel
+@RequiresApi(26)
 
-@RequiresApi(Build.VERSION_CODES.O)
 class TaskViewModelFactory(
     private val taskUseCases: TaskUseCases
 ) : ViewModelProvider.Factory {

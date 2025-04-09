@@ -1,60 +1,85 @@
 package jetpack.cleanarchitecture.momentive.feature_tasks.presentation
 
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.lifecycle.viewmodel.viewModelFactory
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
-import jetpack.cleanarchitecture.momentive.core.presentation.Screen
-import jetpack.cleanarchitecture.momentive.feature_tasks.container.TaskContainer
-import jetpack.cleanarchitecture.momentive.feature_tasks.container.TaskViewModelFactory
-import jetpack.cleanarchitecture.momentive.feature_tasks.presentation.tasks.TaskEvent
-import jetpack.cleanarchitecture.momentive.feature_tasks.presentation.tasks.TaskViewModel
-import jetpack.cleanarchitecture.momentive.feature_tasks.presentation.tasks.components.TaskCard
+import jetpack.cleanarchitecture.momentive.feature_tasks.presentation.events.TaskEvent
+import jetpack.cleanarchitecture.momentive.feature_tasks.presentation.components.tasks_components.AddEditSheet
+import jetpack.cleanarchitecture.momentive.feature_tasks.presentation.components.tasks_components.TaskCard
+import jetpack.cleanarchitecture.momentive.feature_tasks.presentation.events.AddEditEvent
+import kotlinx.coroutines.flow.collectLatest
 
-@RequiresApi(35)
+@RequiresApi(26)
 @Composable
 fun TasksScreen(
     navController : NavHostController,
-    viewModel: TaskViewModel = viewModel(
-        factory = TaskViewModelFactory(TaskContainer.instance.useCases)
-    )
+    viewModel: TaskViewModel,
+    innerPadding: PaddingValues
 ) {
 
-    val state = viewModel.state.value
+    val snackbarHostState = remember {
+        SnackbarHostState()
+    }
 
-    LazyColumn(modifier = Modifier.fillMaxSize().offset(y = 80.dp)) {
+    LaunchedEffect(key1 = true) {
+        viewModel.eventFlow.collectLatest { event ->
 
-        items(state.tasksList) {task ->
+            when(event) {
+                is TaskViewModel.UiEvent.ShowSnackbar -> {
+                    snackbarHostState.showSnackbar(message = event.message)
+                }
+            }
+
+        }
+    }
+
+    val taskState = viewModel.taskState.value
+
+    LazyColumn(modifier = Modifier
+        .fillMaxSize()
+        .padding(innerPadding)
+    ) {
+
+        items(taskState.tasksList) { task ->
             TaskCard(
-                modifier = Modifier.fillMaxWidth().padding(8.dp),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp),
                 title = task.title,
                 description = task.description,
                 priority = task.priority,
                 date = task.date,
-                selected = task in state.selectedTasksList,
+                selected = task in taskState.selectedTasksList,
                 onClick = {
-                    navController.navigate(Screen.AddEditTaskSheet.route)
+                    viewModel.onSheetEvent(AddEditEvent.OpenSheet(taskId = task.id))
                 },
                 onLongClick = {
-                    viewModel.onEvent(TaskEvent.SelectTask(task))
+                    viewModel.onTaskEvent(TaskEvent.SelectTask(task))
                 }
             )
 
         }
         
     }
-    
 
+
+//    Conditionally State Bottom Sheet
+    AddEditSheet(
+        sheetStates = viewModel.sheetStates.value,
+        onSheetEvent = viewModel::onSheetEvent
+    )
 
 }
+

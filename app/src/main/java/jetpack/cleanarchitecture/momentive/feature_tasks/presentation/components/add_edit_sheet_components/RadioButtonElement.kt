@@ -1,10 +1,6 @@
-package jetpack.cleanarchitecture.momentive.feature_tasks.presentation.add_edit_task.components
+package jetpack.cleanarchitecture.momentive.feature_tasks.presentation.components.add_edit_sheet_components
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RadioButtonDefaults
@@ -14,10 +10,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.sp
-import jetpack.cleanarchitecture.momentive.feature_tasks.domain.util.Priority
 
 @Composable
 fun RadioButtonElement(
@@ -33,7 +28,8 @@ fun RadioButtonElement(
         Text(
             text = text,
             textAlign = TextAlign.Center,
-            fontSize = 8.sp
+            fontSize = 8.sp,
+            lineHeight = 8.2.sp // fontSize * 1.2f (by default)
         )
 
         RadioButton(

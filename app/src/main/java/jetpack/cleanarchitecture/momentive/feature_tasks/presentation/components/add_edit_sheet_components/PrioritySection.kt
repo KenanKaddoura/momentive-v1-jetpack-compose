@@ -1,11 +1,9 @@
-package jetpack.cleanarchitecture.momentive.feature_tasks.presentation.add_edit_task.components
+package jetpack.cleanarchitecture.momentive.feature_tasks.presentation.components.add_edit_sheet_components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview

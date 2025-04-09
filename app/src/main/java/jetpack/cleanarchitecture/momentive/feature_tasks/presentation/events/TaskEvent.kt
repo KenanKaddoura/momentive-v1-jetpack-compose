@@ -1,4 +1,4 @@
-package jetpack.cleanarchitecture.momentive.feature_tasks.presentation.tasks
+package jetpack.cleanarchitecture.momentive.feature_tasks.presentation.events
 
 import jetpack.cleanarchitecture.momentive.feature_tasks.domain.model.Task
 
@@ -12,5 +12,5 @@ sealed class TaskEvent {
     data class SelectTask(val task : Task) : TaskEvent()
     class ClickOnMoreActions() : TaskEvent()
     class NewTask() : TaskEvent()
-    class EditTask() : TaskEvent()
+    class EditTask(val id : Int) : TaskEvent()
 }
